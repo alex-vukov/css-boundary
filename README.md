@@ -56,6 +56,8 @@ const App = () => (
 );
 ```
 
+The `CSSBoundary` component can be passed an optional `init` prop to control the behavior of the [attachShadow](https://developer.mozilla.org/en-US/docs/Web/API/Element/attachShadow) function. `init` will be passed directly to `attachShadow` so it should have the expected properties. If `init` is not passed then by default `mode` will be set to `"open"` and `delegatesFocus` to `false`.
+
 > **Warning**
 >
 > Use React version 17 or higher in the microfrontend application. Lower versions of React do not re-render properly when inside a shadow DOM.
@@ -76,5 +78,7 @@ appPlaceholder.innerHTML = '<div>My application</div>';
 // On unmount:
 deleteShadowInstance(parentElement); // parentElement is the HTMLElement where the shadow DOM was attached
 ```
+
+The `createShadowInstance` function can be passed an optional second argument - an `init` object to control the behavior of the [attachShadow](https://developer.mozilla.org/en-US/docs/Web/API/Element/attachShadow) function. `init` will be passed directly to `attachShadow` so it should have the expected properties. If `init` is not passed then by default `mode` will be set to `"open"` and `delegatesFocus` to `false`.
 
 Both ways will render the microfronend application inside a shadow DOM attached to the app injection HTML element. Any global or local CSS used anywhere in the embedded application will be placed inside the shadowRoot and will not affect or be affected by the host application.
