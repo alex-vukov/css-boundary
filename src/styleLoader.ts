@@ -1,5 +1,5 @@
 // Create a shadow container with all styles and a placeholder for the app injection
-export const createShadowInstance = function (parentElementId: string) {
+export const createShadowInstance = function (parentElementId: string, init?: ShadowRootInit) {
   const { styles, instances }: { styles: HTMLElement[]; instances: { [key: string]: HTMLElement } } =
     window["css-boundary-" + __webpack_runtime_id__];
   const shadowContainer = document.getElementById(parentElementId);
@@ -9,7 +9,7 @@ export const createShadowInstance = function (parentElementId: string) {
   // Block all styles coming from the light DOM
   shadowContainer.style.all = "initial";
   try {
-    shadowContainer.attachShadow({ mode: "open", delegatesFocus: true });
+    shadowContainer.attachShadow(init || { mode: "open", delegatesFocus: false });
     if (!shadowContainer.shadowRoot) {
       throw new Error("Shadow root not available");
     }
