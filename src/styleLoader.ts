@@ -8,22 +8,28 @@ export const createShadowInstance = function (parentElementId: string, init?: Sh
   }
   // Block all styles coming from the light DOM
   shadowContainer.style.all = "initial";
-  try {
+  if (!shadowContainer.shadowRoot) {
     shadowContainer.attachShadow(init || { mode: "open", delegatesFocus: false });
-    if (!shadowContainer.shadowRoot) {
-      throw new Error("Shadow root not available");
-    }
-  } catch (error) {
-    throw error;
   }
-  shadowContainer.shadowRoot.append(...styles.map((style) => style.cloneNode(true)));
+  if (!shadowContainer.shadowRoot) {
+    throw new Error("Shadow root could not be attached!");
+  }
+  shadowContainer.shadowRoot.append(
+    ...styles.map((style) => {
+      const deepClone = style.cloneNode(true) as HTMLElement;
+      deepClone.dataset.cssb = "true";
+      return deepClone;
+    }),
+  );
   instances[parentElementId] = shadowContainer;
   return shadowContainer.shadowRoot;
 };
 
-export const deleteShadowInstance = function (id: string) {
+export const deleteShadowInstance = function (parentElementId: string) {
   const { instances } = window["css-boundary-" + __webpack_runtime_id__];
-  delete instances[id];
+  const shadowContainer = document.getElementById(parentElementId);
+  shadowContainer?.shadowRoot?.querySelectorAll("[data-cssb]").forEach((el) => el.remove());
+  delete instances[parentElementId];
 };
 
 export const insert = function (style: HTMLElement) {
