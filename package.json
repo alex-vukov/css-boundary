@@ -1,6 +1,6 @@
 {
   "name": "css-boundary",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "CSS Boundary for Microfrontend Applications",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
