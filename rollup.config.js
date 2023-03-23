@@ -6,7 +6,7 @@ const extensions = [".js", ".ts", ".tsx", ".json"];
 
 const config = {
   input: "src/index.ts",
-  external: [/@babel\/runtime/, "react", "react-dom"],
+  external: [/@babel\/runtime/, "react", "react-dom", "style-loader"],
   output: [
     {
       dir: "dist/",
