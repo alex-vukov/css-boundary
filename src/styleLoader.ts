@@ -10,9 +10,9 @@ export const createShadowInstance = function (parentElementId: string, init?: Sh
   shadowContainer.style.all = "initial";
   if (!shadowContainer.shadowRoot) {
     shadowContainer.attachShadow(init || { mode: "open", delegatesFocus: false });
-  }
-  if (!shadowContainer.shadowRoot) {
-    throw new Error("Shadow root could not be attached!");
+    if (!shadowContainer.shadowRoot) {
+      throw new Error("Shadow root could not be attached!");
+    }
   }
   shadowContainer.shadowRoot.append(
     ...styles.map((style) => {

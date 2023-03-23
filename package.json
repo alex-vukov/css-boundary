@@ -1,6 +1,6 @@
 {
   "name": "css-boundary",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "CSS Boundary for Microfrontend Applications",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -50,7 +50,10 @@
   },
   "peerDependencies": {
     "webpack": "^5.25.0",
-    "react": "^17.0.0 || ^18.0.0",
-    "react-dom": "^17.0.0 || ^18.0.0"
+    "style-loader": "^3.0.0"
+  },
+  "optionalDependencies": {
+    "react": ">=17.0.0",
+    "react-dom": ">=17.0.0"
   }
 }
